@@ -2,6 +2,8 @@ package com.scaler.splitwise.controllers;
 
 import com.scaler.splitwise.dtos.CreateUserRequestDto;
 import com.scaler.splitwise.dtos.CreateUserResponseDto;
+import com.scaler.splitwise.dtos.UpdatePasswordRequestDto;
+import com.scaler.splitwise.dtos.UpdatePasswordResponseDto;
 import com.scaler.splitwise.exceptions.UserAlreadyExistsException;
 import com.scaler.splitwise.models.User;
 import com.scaler.splitwise.services.UserService;
@@ -40,6 +42,28 @@ public class UserController {
     response.setStatus("SUCCESS");
     response.setMessage("User created successfully");
 
+    return response;
+  }
+
+  public UpdatePasswordResponseDto updateUserPassword(UpdatePasswordRequestDto request) {
+
+    String userId = request.getUserId();
+    String password = request.getPassword();
+
+    UpdatePasswordResponseDto response = new UpdatePasswordResponseDto();
+
+    User user;
+
+    try {
+      user = userService.updateUserPassword(userId, password);
+    } catch (Exception exception) {
+      response.setStatus("FAILED");
+      response.setMessage(exception.getMessage());
+      return response;
+    }
+    response.setUserId(user.getId());
+    response.setStatus("SUCCESS");
+    response.setMessage("Password updated successfully");
     return response;
   }
 }
