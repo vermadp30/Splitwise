@@ -1,20 +1,22 @@
 package com.scaler.splitwise.dtos;
 
+import com.scaler.splitwise.services.Transaction;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateGroupResponseDto {
-  private Long groupId;
+public class SettleUpGroupResponseDto {
+  private List<Transaction> transactions;
   private String status;
   private String message;
 
   @Override
   public String toString() {
-    return "Create Group Response {"
-        + "groupId="
-        + groupId
+    return "Settle-Up Group{"
+        + "transactions="
+        + transactions
         + ", status='"
         + status
         + '\''
